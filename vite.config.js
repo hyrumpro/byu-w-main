@@ -33,8 +33,10 @@ export default defineConfig({
     copy({
       targets: [
         { src: "src/json/**/*", dest: "dist/json" },
+        { src: "src/images/**/*", dest: "dist/images" },
       ],
       hook: "writeBundle",
     }),
   ],
 });
+
