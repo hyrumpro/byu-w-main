@@ -1,26 +1,26 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItemsString = getLocalStorage("so-cart");
-  let cartItems = [];
+  const cartItems = getLocalStorage("so-cart");
+  const productList = document.querySelector(".product-list");
 
-  if (cartItemsString) {
-    if (typeof cartItemsString === "object") {
-      cartItems = [cartItemsString];
-    } else {
-      try {
-        cartItems = JSON.parse(cartItemsString);
-        if (!Array.isArray(cartItems)) {
-          cartItems = [cartItems];
-        }
-      } catch (error) {
-        console.error("Error parsing cart data from localStorage:", error);
-      }
-    }
+  if (cartItems.length === 0) {
+    productList.innerHTML = "<p>No items in the cart.</p>";
+  } else {
+    const htmlItems = cartItems.map(cartItemTemplate);
+    productList.innerHTML = htmlItems.join("");
+    addRemoveListeners();
   }
+}
 
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+function addRemoveListeners() {
+  const removeIcons = document.querySelectorAll(".cart-card__remove");
+  removeIcons.forEach((icon) => {
+    icon.addEventListener("click", () => {
+      const itemId = icon.dataset.id;
+      removeFromCart(itemId);
+    });
+  });
 }
 
 function cartItemTemplate(item) {
@@ -31,12 +31,20 @@ function cartItemTemplate(item) {
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
     </a>
-    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+    <p class="cart-card__color">${item.Colors && item.Colors.length > 0 ? item.Colors[0].ColorName : ''}</p>
     <p class="cart-card__quantity">qty: 1</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
+    <span class="cart-card__remove" data-id="${item.Id}">X</span>
   </li>`;
 
   return newItem;
+}
+
+function removeFromCart(itemId) {
+  const cartItems = getLocalStorage("so-cart");
+  const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
+  setLocalStorage("so-cart", updatedCartItems);
+  renderCartContents();
 }
 
 renderCartContents();

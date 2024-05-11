@@ -25,6 +25,11 @@ body {
 img {
   max-width: 100%;
 }
+
+.cart-card__remove {
+  cursor: pointer;
+}
+
 header {
   display: flex;
   justify-content: space-between;
