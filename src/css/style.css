@@ -115,6 +115,41 @@ button {
   fill: gray;
 }
 
+
+
+
+header .search {
+  display: flex;
+  align-items: center;
+}
+
+header .search form {
+  display: flex;
+  align-items: center;
+}
+
+header .search input {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+header .search button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+header .search button:hover {
+  background-color: #0056b3;
+}
+
+
+
 /* End cart icon styles */
 
 .mission {
@@ -159,6 +194,27 @@ button {
 .card__name {
   font-size: 1em;
 }
+
+.cart-footer {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  text-align: right;
+}
+
+.cart-footer.hide {
+  display: none;
+}
+
+.cart-total {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+
+
+
 /* End product list card */
 
 .product-detail {
@@ -220,6 +276,9 @@ button {
     grid-template-columns: 150px auto 15%;
   }
 }
+
+
+
 
 footer {
   font-size: var(--small-font);
