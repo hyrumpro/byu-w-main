@@ -47,30 +47,35 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
 }
 
 
-export function renderWithTemplate(template, parent, data, callback) {
-  parent.insertAdjacentHTML("afterbegin", template);
-  if (callback) {
-    callback(data);
-  }
-}
 
 export async function loadTemplate(path) {
   const response = await fetch(path);
-  console.log('Response:', response);
+  if (!response.ok) {
+    throw new Error(`Failed to load template from ${path}`);
+  }
   const html = await response.text();
-  console.log('HTML:', html);
   const template = document.createElement('template');
   template.innerHTML = html;
   return template;
 }
 
-export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate('partials/header.html');
-  const footerTemplate = await loadTemplate('partials/footer.html');
-  const headerElement = document.querySelector('#main-header');
-  const footerElement = document.querySelector('#main-footer');
-  renderWithTemplate(headerTemplate.content, headerElement);
-  renderWithTemplate(footerTemplate.content, footerElement);
+export function renderWithTemplate(template, targetElement) {
+  targetElement.innerHTML = '';
+  targetElement.appendChild(template.cloneNode(true));
 }
+
+export async function loadHeaderFooter() {
+  try {
+    const headerTemplate = await loadTemplate('../partials/header.html');
+    const footerTemplate = await loadTemplate('../partials/footer.html');
+    const headerElement = document.querySelector('#main-header');
+    const footerElement = document.querySelector('#main-footer');
+    renderWithTemplate(headerTemplate.content, headerElement);
+    renderWithTemplate(footerTemplate.content, footerElement);
+  } catch (error) {
+    console.error('Error loading header or footer:', error);
+  }
+}
+
 
 
