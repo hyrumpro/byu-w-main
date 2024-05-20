@@ -77,7 +77,7 @@ export default class CheckoutProcess {
 
       if (response.ok) {
         clearLocalStorage("so-cart");
-        window.location.href = "success.html";
+        window.location.href = "/checkout/success.html";
       } else {
         alertMessage(responseData.cardNumber || "There was an issue with your order. Please try again.");
       }
