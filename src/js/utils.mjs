@@ -28,6 +28,12 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
+
+export function clearLocalStorage(key) {
+  localStorage.removeItem(key);
+}
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -74,6 +80,19 @@ export async function loadHeaderFooter() {
     renderWithTemplate(footerTemplate.content, footerElement);
   } catch (error) {
     console.error('Error loading header or footer:', error);
+  }
+}
+
+export function alertMessage(message, scroll = true) {
+  const alertBox = document.createElement("div");
+  alertBox.className = "alert-message";
+  alertBox.textContent = message;
+
+  const mainElement = document.querySelector("main");
+  mainElement.insertBefore(alertBox, mainElement.firstChild);
+
+  if (scroll) {
+    window.scrollTo(0, 0);
   }
 }
 
