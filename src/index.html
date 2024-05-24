@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Home</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <script src="./js/Modalsend.js" type="module"></script>
   </head>
   <body>
   <div id="main-header"></div>
@@ -98,7 +99,25 @@
           </li>
         </ul>
       </section>
+
+    <section class="newsletter-signup">
+      <h2>Sign Up for Our Newsletter</h2>
+      <form id="newsletter-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
     </main>
     <footer>&copy;NOT a real business</footer>
+
+  <div id="first-visit-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Welcome to Sleep Outside!</h2>
+      <p>Register with us and enter our giveaway for a chance to win amazing outdoor gear!</p>
+      <button id="register-button" >Register Now</button>
+    </div>
+  </div>
   </body>
 </html>

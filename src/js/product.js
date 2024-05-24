@@ -18,6 +18,9 @@ function addProductToCart(product) {
 }
 
 
+
+
+
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
   addProductToCart(product);
@@ -27,3 +30,7 @@ async function addToCartHandler(e) {
 document
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler);
+
+
+// Handle add to cart
+
