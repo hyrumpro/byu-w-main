@@ -2,22 +2,21 @@ function isFirstVisit() {
   return !localStorage.getItem("visited");
 }
 
-// Function to show the modal
+
 function showModal() {
   const modal = document.getElementById("first-visit-modal");
   modal.style.display = "block";
 }
 
-// Function to close the modal
 function closeModal() {
   const modal = document.getElementById("first-visit-modal");
   modal.style.display = "none";
 }
 
-// Event listener for the close button
+
 document.querySelector(".close-button").addEventListener("click", closeModal);
 
-// Event listener for clicks outside the modal
+
 window.addEventListener("click", function(event) {
   const modal = document.getElementById("first-visit-modal");
   if (event.target == modal) {
@@ -25,7 +24,6 @@ window.addEventListener("click", function(event) {
   }
 });
 
-// Show the modal if it's the user's first visit
 if (isFirstVisit()) {
   showModal();
   localStorage.setItem("visited", "true");
